@@ -54,4 +54,8 @@
     return result;
 }
 
+-(NSString *)description {
+    return [NSString stringWithFormat:@"operandStack = %@", self.operandStack];
+}
+
 @end
