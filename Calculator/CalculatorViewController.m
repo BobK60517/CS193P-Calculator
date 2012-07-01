@@ -25,5 +25,10 @@
         self.userIsInTheMiddleOfEnteringANumber = YES;
     }
 }
+- (IBAction)enterPressed {
+}
+
+- (IBAction)operationPressed:(UIButton *)sender {
+}
 
 @end
