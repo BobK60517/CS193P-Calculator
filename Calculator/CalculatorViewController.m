@@ -16,7 +16,8 @@
 
 @implementation CalculatorViewController
 
-@synthesize display;
+@synthesize history = _history;
+@synthesize display = _display;
 @synthesize userIsInTheMiddleOfEnteringANumber = _userIsInTheMiddleOfEnteringANumber;
 @synthesize brain = _brain;
 // Lazily instanstiate the _brain
@@ -43,6 +44,7 @@
 }
 - (IBAction)enterPressed {
     [self.brain pushOperand:[self.display.text doubleValue]];
+    self.history.text = [NSString stringWithFormat:@"%@ %@", self.history.text, self.display.text];
     self.userIsInTheMiddleOfEnteringANumber = NO;
 }
 
@@ -52,7 +54,20 @@
     }
     NSString *operation = sender.currentTitle;
     double result = [self.brain performOperation:operation];
+    self.history.text = [NSString stringWithFormat:@"%@ %@", self.history.text, operation];
     self.display.text = [NSString stringWithFormat:@"%g", result];
 }
 
+- (IBAction)clearPressed {
+    self.history.text = @"";
+    self.display.text = @"";
+    self.userIsInTheMiddleOfEnteringANumber = NO;
+    [self.brain clearAllOperands];
+}
+
+- (void)viewDidUnload {
+    [self setHistory:nil];
+    [self setHistory:nil];
+    [super viewDidUnload];
+}
 @end

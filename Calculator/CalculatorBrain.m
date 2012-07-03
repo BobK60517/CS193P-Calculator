@@ -69,6 +69,10 @@
     return result;
 }
 
+-(void)clearAllOperands {
+    [self.operandStack removeAllObjects];
+}
+
 -(NSString *)description {
     return [NSString stringWithFormat:@"operandStack = %@", self.operandStack];
 }
