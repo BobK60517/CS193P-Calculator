@@ -27,6 +27,13 @@
 
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = sender.currentTitle;
+    // Handle decimal point (allow only one per number)
+    if ([digit isEqualToString:@"."]) {
+        NSRange range = [self.display.text rangeOfString:@"."];
+        if (range.location != NSNotFound
+            && self.userIsInTheMiddleOfEnteringANumber) digit = @"";
+    }
+    
     if (self.userIsInTheMiddleOfEnteringANumber) {
         self.display.text = [self.display.text stringByAppendingString:digit];
     } else {

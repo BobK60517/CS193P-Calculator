@@ -47,6 +47,21 @@
         double divisor = [self popOperand];
         double numerand = [self popOperand];
         if (divisor) result = numerand / divisor;
+    } else if ([operation isEqualToString:@"sin"]) {
+        double operand = [self popOperand];
+        operand = (operand * M_PI/180.0); // first convert the operand from radians to degrees then perform the operation
+        result = sin(operand);
+    } else if ([operation isEqualToString:@"cos"]) {
+        double operand = [self popOperand];
+        operand = (operand * M_PI/180.0); // first convert the operand from radians to degrees then perform the operation
+        result = cos(operand);
+    } else if ([operation isEqualToString:@"sqrt"]) {
+        double operand = [self popOperand];
+        if (operand >= 0.0) {
+            result = sqrt(operand);
+        }
+    } else if ([operation isEqualToString:@"π"]) {
+        result = M_PI;
     }
     
     [self pushOperand:result]; // put result back on stack for next operation
